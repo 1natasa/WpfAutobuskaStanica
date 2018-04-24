@@ -1,0 +1,67 @@
+﻿<Window x:Class="WpfAutobuskaStanica.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfAutobuskaStanica"
+        mc:Ignorable="d"
+        Title="Autobuska stanica" Height="450" Width="800">
+    <Grid Margin="0,0,-8,40">
+        <DataGrid Name="dataGridCentralni" HorizontalAlignment="Center" VerticalAlignment="Center" Height="auto"
+                  Width="auto" AlternatingRowBackground="DarkOliveGreen" IsReadOnly="True"  SelectionUnit="FullRow" 
+                  SelectionMode="single" />
+        <StackPanel  HorizontalAlignment="Center" VerticalAlignment="Top" Height="30" Width="auto" Orientation="Horizontal">
+            <Button Name="btnKarta" Content="Karta" VerticalAlignment="Top" Width="75" Height="30"/>
+            <Button Name="btnKorisnik" Content="Korisnik" VerticalAlignment="Top" Width="75" Height="30"/>
+            <Button Name="btnKupacKarte" Content="Kupac karte" VerticalAlignment="Top" Width="75" Height="30"/>
+            <Button Name="btnMarka" Content="Marka vozila" VerticalAlignment="Top" Width="75" Height="30"/>
+            <Button Name="btnModel" Content="Model vozila" VerticalAlignment="Top" Width="75" Height="30"/>
+            <Button Name="btnTip" Content="Tip vozila" VerticalAlignment="Top" Width="75" Height="30"/>
+            <Button Name="btnPrevoznik" Content="Prevoznik" VerticalAlignment="Top" Width="75" Height="30"/>
+            <Button Name="btnRelazija" Content="Relacija" VerticalAlignment="Top" Width="75" Height="30"/>
+            <Button Name="btnVozac" Content="Vozac" VerticalAlignment="Top" Width="75" Height="30"/>
+            <Button Name="btnVozilo" Content="Vozilo" VerticalAlignment="Top" Width="75" Height="30"/>
+        </StackPanel>
+        <StackPanel  HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="30" Width="352" Orientation="Horizontal">
+            <Button Name="btnDodajKartu" Content="Dodaj kartu" VerticalAlignment="Top" Width="117" Height="30"/>
+            <Button Name="btnIzmeniKartu" Content="Izmeni kartu" VerticalAlignment="Top" Width="117" Height="30"/>
+            <Button Name="btnObrisiKartu" Content="Obrisi kartu" VerticalAlignment="Top" Width="117" Height="30"/>
+
+            <Button Name="btnDodajKorisnika" Content="Dodaj korisnika" VerticalAlignment="Top" Width="117" Height="30"/>
+            <Button Name="btnIzmeniKorisnika" Content="Izmeni korisnika" VerticalAlignment="Top" Width="117" Height="30"/>
+            <Button Name="btnObrisiKorisnika" Content="Obrisi korisnika" VerticalAlignment="Top" Width="117" Height="30"/>
+
+            <Button Name="btnDodajKupca" Content="Dodaj kupca karte" VerticalAlignment="Top" Width="117" Height="30"/>
+            <Button Name="btnIzmeniKupca" Content="Izmeni kupca karte" VerticalAlignment="Top" Width="117" Height="30"/>
+            <Button Name="btnObrisiKupca" Content="Obrisi kupca karte" VerticalAlignment="Top" Width="117" Height="30"/>
+
+            <Button Name="btnDodajMarku" Content="Dodaj marku" VerticalAlignment="Top" Width="117" Height="30"/>
+            <Button Name="btnIzmeniMarku" Content="Izmeni marku" VerticalAlignment="Top" Width="117" Height="30"/>
+            <Button Name="btnObrisiMarku" Content="Obrisi marku" VerticalAlignment="Top" Width="117" Height="30"/>
+
+            <Button Name="btnDodajModel" Content="Dodaj model" VerticalAlignment="Top" Width="117" Height="30"/>
+            <Button Name="btnIzmeniModel" Content="Izmeni model" VerticalAlignment="Top" Width="117" Height="30"/>
+            <Button Name="btnObrisiModel" Content="Obrisi model" VerticalAlignment="Top" Width="117" Height="30"/>
+
+            <Button Name="btnDodajTip" Content="Dodaj tip" VerticalAlignment="Top" Width="117" Height="30"/>
+            <Button Name="btnIzmeniTip" Content="Izmeni tip" VerticalAlignment="Top" Width="117" Height="30"/>
+            <Button Name="btnObrisiTip" Content="Obrisi tip" VerticalAlignment="Top" Width="117" Height="30"/>
+
+            <Button Name="btnDodajPrevoznika" Content="Dodaj prevoznik" VerticalAlignment="Top" Width="117" Height="30"/>
+            <Button Name="btnIzmeniPrevoznika" Content="Izmeni prevoznik" VerticalAlignment="Top" Width="117" Height="30"/>
+            <Button Name="btnObrisiPrevoznika" Content="Obrisi prevoznik" VerticalAlignment="Top" Width="117" Height="30"/>
+
+            <Button Name="btnDodajRelaciju" Content="Dodaj relaciju" VerticalAlignment="Top" Width="117" Height="30"/>
+            <Button Name="btnIzmeniRelaciju" Content="Izmeni relaciju" VerticalAlignment="Top" Width="117" Height="30"/>
+            <Button Name="btnObrisiRelaciju" Content="Obrisi relaciju" VerticalAlignment="Top" Width="117" Height="30"/>
+
+            <Button Name="btnDodajVozaca" Content="Dodaj vozaca" VerticalAlignment="Top" Width="117" Height="30"/>
+            <Button Name="btnIzmeniVozaca" Content="Izmeni vozaca" VerticalAlignment="Top" Width="117" Height="30"/>
+            <Button Name="btnObrisiVozaca" Content="Obrisi vozaca" VerticalAlignment="Top" Width="117" Height="30"/>
+
+            <Button Name="btnDodajVozilo" Content="Dodaj vozilo" VerticalAlignment="Top" Width="117" Height="30"/>
+            <Button Name="btnIzmeniVozilo" Content="Izmeni vozilo" VerticalAlignment="Top" Width="117" Height="30"/>
+            <Button Name="btnObrisiVozilo" Content="Obrisi vozilo" VerticalAlignment="Top" Width="117" Height="30"/>
+        </StackPanel>
+    </Grid>
+</Window>

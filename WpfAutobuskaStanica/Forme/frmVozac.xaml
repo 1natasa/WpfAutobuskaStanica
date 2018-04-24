@@ -1,0 +1,28 @@
+﻿<Window x:Class="WpfAutobuskaStanica.Forme.frmVozac"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfAutobuskaStanica.Forme"
+        mc:Ignorable="d"
+        Title="frmVozac" Height="450" Width="500">
+    <Grid>
+        <Label Content="Ime" HorizontalAlignment="Left" Margin="77,36,0,0" VerticalAlignment="Top" Height="29" Width="31"/>
+        <TextBox Name="txtImeVozac" HorizontalAlignment="Left" Height="25" Margin="181,40,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="123"/>
+        <Label Content="Prezime" HorizontalAlignment="Left" Margin="75,70,0,0" VerticalAlignment="Top" Height="29" Width="54"/>
+        <TextBox Name="txtPrezimeVozac" HorizontalAlignment="Left" Height="25" Margin="181,70,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="123"/>
+        <Label Content="Jmbg" HorizontalAlignment="Left" Margin="77,104,0,0" VerticalAlignment="Top" Height="29" Width="40"/>
+        <TextBox Name="txtJmbgVozac" HorizontalAlignment="Left" Height="25" Margin="181,104,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="123"/>
+        <Label Content="Kontakt" HorizontalAlignment="Left" Margin="77,138,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.207,-1.029" Height="28" Width="52"/>
+        <TextBox Name="txtKontaktVozac" HorizontalAlignment="Left" Height="25" Margin="181,141,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="123"/>
+        <Label Content="Adresa" HorizontalAlignment="Left" Margin="80,211,0,0" VerticalAlignment="Top" Height="28" Width="47"/>
+        <TextBox Name="txtAdresaKorisnik" HorizontalAlignment="Left" Height="25" Margin="181,214,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="123"/>
+        <Label Content="Grad" HorizontalAlignment="Left" Margin="80,248,0,0" VerticalAlignment="Top" Height="28" Width="37"/>
+        <TextBox Name="txtGradVozac" HorizontalAlignment="Left" Height="25" Margin="181,251,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="123"/>
+        <Button Name="btnSacuvaj" Content="Sacuvaj" HorizontalAlignment="Left" Margin="77,308,0,0" VerticalAlignment="Top" Width="80" Height="36" Click="btnSacuvaj_Click"/>
+        <Button Name="btnOtkazi" Content="Otkazi" HorizontalAlignment="Left" Margin="219,308,0,0" VerticalAlignment="Top" Width="85" Height="36" Click="btnOtkazi_Click"/>
+        <Label Content="Vozavka dozvola" HorizontalAlignment="Left" Margin="75,172,0,0" VerticalAlignment="Top"/>
+        <TextBox Name="txtVozackaDoz" HorizontalAlignment="Left" Height="23" Margin="184,175,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+
+    </Grid>
+</Window>

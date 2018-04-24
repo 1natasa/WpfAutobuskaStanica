@@ -1,0 +1,38 @@
+﻿<Window x:Class="WpfAutobuskaStanica.Forme.frmVozilo"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfAutobuskaStanica.Forme"
+        mc:Ignorable="d"
+        Title="frmVozilo" Height="450" Width="800">
+    <Grid>
+        <Label Content="Broj sasije" HorizontalAlignment="Left" Margin="52,43,0,0" VerticalAlignment="Top"/>
+        <Label Content="Kubikaza" HorizontalAlignment="Left" Margin="52,95,0,0" VerticalAlignment="Top"/>
+        <Label Content="Konjske snage" HorizontalAlignment="Left" Margin="52,159,0,0" VerticalAlignment="Top"/>
+        <Label Content="Nosivost" HorizontalAlignment="Left" Margin="52,217,0,0" VerticalAlignment="Top"/>
+        <Label Content="Masa" HorizontalAlignment="Left" Margin="52,261,0,0" VerticalAlignment="Top"/>
+        <Label Content="Broj sedista" HorizontalAlignment="Left" Margin="52,328,0,0" VerticalAlignment="Top"/>
+        <Label Content="Boja" HorizontalAlignment="Left" Margin="398,43,0,0" VerticalAlignment="Top"/>
+        <Label Content="Marka" HorizontalAlignment="Left" Margin="398,95,0,0" VerticalAlignment="Top" RenderTransformOrigin="4.069,-2.998"/>
+        <Label Content="Model" HorizontalAlignment="Left" Margin="398,159,0,0" VerticalAlignment="Top"/>
+        <Label Content="Tip" HorizontalAlignment="Left" Margin="398,217,0,0" VerticalAlignment="Top"/>
+        <Label Content="Vozac" HorizontalAlignment="Left" Margin="398,261,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.268,-0.887"/>
+        <Label Content="Prevoznik" HorizontalAlignment="Left" Margin="398,328,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.184,-1.553"/>
+        <TextBox Name="txtBrSasije" HorizontalAlignment="Left" Height="23" Margin="170,46,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox Name="txtKubikaza" HorizontalAlignment="Left" Height="23" Margin="170,98,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox Name="txtKonjskeSnage" HorizontalAlignment="Left" Height="23" Margin="170,159,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox Name="txtNosivost" HorizontalAlignment="Left" Height="23" Margin="170,220,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox Name="txtMasa" HorizontalAlignment="Left" Height="23" Margin="170,265,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox Name="txtBrSedista" HorizontalAlignment="Left" Height="23" Margin="170,328,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox Name="txtBoja" HorizontalAlignment="Left" Height="23" Margin="518,46,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <ComboBox Name="cbxMarka" HorizontalAlignment="Left" Margin="518,95,0,0" VerticalAlignment="Top" Width="120" SelectedValuePath="markaID" DisplayMemberPath="naziv"/>
+        <ComboBox Name="cbxModel" HorizontalAlignment="Left" Margin="518,159,0,0" VerticalAlignment="Top" Width="120" SelectedValuePath="modelID" DisplayMemberPath="naziv"/>
+        <ComboBox Name="cbxTip" HorizontalAlignment="Left" Margin="518,217,0,0" VerticalAlignment="Top" Width="120" SelectedValuePath="tipVozilaID" DisplayMemberPath="naziiv"/>
+        <ComboBox Name="cbxVozac" HorizontalAlignment="Left" Margin="518,266,0,0" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.504,0.763" SelectedValuePath="vozacID" DisplayMemberPath="Vozac"/>
+        <ComboBox Name="cbxPrevoznik" HorizontalAlignment="Left" Margin="518,328,0,0" VerticalAlignment="Top" Width="120" SelectedValuePath="prevoznikID" DisplayMemberPath="naziv"/>
+        <Button Name="btnSacuvaj" Content="Sacuvaj" HorizontalAlignment="Left" Margin="255,385,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.528,0.953" Click="btnSacuvaj_Click"/>
+        <Button Name="btnOtkazi" Content="Otkazi" HorizontalAlignment="Left" Margin="398,385,0,0" VerticalAlignment="Top" Width="75" Click="btnOtkazi_Click"/>
+
+    </Grid>
+</Window>
