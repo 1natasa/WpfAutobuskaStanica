@@ -18,10 +18,10 @@ namespace WpfAutobuskaStanica.Forme
     /// <summary>
     /// Interaction logic for Korisnik.xaml
     /// </summary>
-    public partial class Korisnik : Window
+    public partial class frmKorisnik : Window
     {
         public SqlConnection konekcija = Konekcija.KreirajKonekciju();
-        public Korisnik()
+        public frmKorisnik()
         {
             InitializeComponent();
             txtImeKorisnik.Focus();

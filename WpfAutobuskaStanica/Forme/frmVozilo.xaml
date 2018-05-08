@@ -28,7 +28,7 @@
         <TextBox Name="txtBoja" HorizontalAlignment="Left" Height="23" Margin="518,46,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <ComboBox Name="cbxMarka" HorizontalAlignment="Left" Margin="518,95,0,0" VerticalAlignment="Top" Width="120" SelectedValuePath="markaID" DisplayMemberPath="naziv"/>
         <ComboBox Name="cbxModel" HorizontalAlignment="Left" Margin="518,159,0,0" VerticalAlignment="Top" Width="120" SelectedValuePath="modelID" DisplayMemberPath="naziv"/>
-        <ComboBox Name="cbxTip" HorizontalAlignment="Left" Margin="518,217,0,0" VerticalAlignment="Top" Width="120" SelectedValuePath="tipVozilaID" DisplayMemberPath="naziiv"/>
+        <ComboBox Name="cbxTip" HorizontalAlignment="Left" Margin="518,217,0,0" VerticalAlignment="Top" Width="120" SelectedValuePath="tipVozilaID" DisplayMemberPath="naziv"/>
         <ComboBox Name="cbxVozac" HorizontalAlignment="Left" Margin="518,266,0,0" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.504,0.763" SelectedValuePath="vozacID" DisplayMemberPath="Vozac"/>
         <ComboBox Name="cbxPrevoznik" HorizontalAlignment="Left" Margin="518,328,0,0" VerticalAlignment="Top" Width="120" SelectedValuePath="prevoznikID" DisplayMemberPath="naziv"/>
         <Button Name="btnSacuvaj" Content="Sacuvaj" HorizontalAlignment="Left" Margin="255,385,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.528,0.953" Click="btnSacuvaj_Click"/>

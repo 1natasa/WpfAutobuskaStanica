@@ -91,7 +91,7 @@ namespace WpfAutobuskaStanica.Forme
                 //
                 konekcija.Open();
                 string insert = @"insert into Vozilo(brSasije,kubikaza,konjskaSnaga,boja,brSedista,nosivost,masa,tipVozilaID,markaID,modelID,vozacID,prevoznikID)
-                values('" + txtBrSasije.Text + "'," + txtKubikaza.Text + "," + txtKonjskeSnage.Text + ",'" + txtBoja.Text + "'," + txtBrSedista + ",'" + txtNosivost.Text + "','" + txtMasa.Text + "','" + cbxTip.SelectedValue + "','" + cbxMarka.SelectedValue + "','" + cbxModel.SelectedValue + "','" + cbxVozac.SelectedValue + "','" + cbxPrevoznik.SelectedValue + "');";
+                values(" + txtBrSasije.Text + "," + txtKubikaza.Text + "," + txtKonjskeSnage.Text + ",'" + txtBoja.Text + "'," + txtBrSedista.Text + "," + txtNosivost.Text + "," + txtMasa.Text + ",'" + cbxTip.SelectedValue + "','" + cbxMarka.SelectedValue + "','" + cbxModel.SelectedValue + "','" + cbxVozac.SelectedValue + "','" + cbxPrevoznik.SelectedValue + "');";
                 SqlCommand cmd = new SqlCommand(insert, konekcija);
                 cmd.ExecuteNonQuery();
                 this.Close(); //ovo zatvara formu

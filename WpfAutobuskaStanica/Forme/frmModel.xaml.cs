@@ -19,10 +19,10 @@ namespace WpfAutobuskaStanica.Forme
     /// <summary>
     /// Interaction logic for Model.xaml
     /// </summary>
-    public partial class Model : Window
+    public partial class frmModel : Window
     {
         public SqlConnection konekcija = Konekcija.KreirajKonekciju();
-        public Model()
+        public frmModel()
         {
             InitializeComponent();
             txtNaziv.Focus();

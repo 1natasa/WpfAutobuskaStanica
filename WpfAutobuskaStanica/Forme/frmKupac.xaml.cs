@@ -18,10 +18,10 @@ namespace WpfAutobuskaStanica.Forme
     /// <summary>
     /// Interaction logic for Kupac.xaml
     /// </summary>
-    public partial class Kupac : Window
+    public partial class frmKupac : Window
     {
         public SqlConnection konekcija = Konekcija.KreirajKonekciju();
-        public Kupac()
+        public frmKupac()
         {
             InitializeComponent();
             txtImeKupac.Focus();

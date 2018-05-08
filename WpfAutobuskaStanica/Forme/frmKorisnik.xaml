@@ -1,11 +1,11 @@
-﻿<Window x:Class="WpfAutobuskaStanica.Forme.Korisnik"
+﻿<Window x:Class="WpfAutobuskaStanica.Forme.frmKorisnik"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfAutobuskaStanica.Forme"
         mc:Ignorable="d"
-        Title="Korisnik" Height="450" Width="500">
+        Title="frmKorisnik" Height="450" Width="500">
     <Grid>
         <Label Content="Ime" HorizontalAlignment="Left" Margin="77,36,0,0" VerticalAlignment="Top" Height="29" Width="31"/>
         <TextBox Name="txtImeKorisnik" HorizontalAlignment="Left" Height="25" Margin="181,40,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="123"/>

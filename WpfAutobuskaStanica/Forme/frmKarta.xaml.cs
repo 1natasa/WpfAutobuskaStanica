@@ -33,7 +33,7 @@ namespace WpfAutobuskaStanica.Forme
                 //cbxRelacija
                 //komentar
                 konekcija.Open();
-                string vratiRelaciju = "select relacijaID, pocetnaStanica + ' ' + krajnjaStanica + ' ' + peron + ' ' + cena as Relacija from Relacija";
+                string vratiRelaciju = "select relacijaID, pocetnaStanica + ' ' + krajnjaStanica as Relacija, peron, cena  from Relacija";
                 DataTable dtRelacija = new DataTable();
                 SqlDataAdapter daKarta = new SqlDataAdapter(vratiRelaciju, konekcija);
                 daKarta.Fill(dtRelacija);
@@ -47,7 +47,7 @@ namespace WpfAutobuskaStanica.Forme
                 cbxKorisnik.ItemsSource = dtKorisnik.DefaultView;
 
                 //cbxKupacKarte
-                string vratiKupca = "select kupacKarteID, ime+ ' ' + prezime + ' ' + popust as Kupac from kupacKarte";
+                string vratiKupca = "select kupacKarteID, ime+ ' ' + prezime as Kupac, popust from kupacKarte";
                 DataTable dtKupac = new DataTable();
                 SqlDataAdapter daKupac = new SqlDataAdapter(vratiKupca,konekcija);
                 daKupac.Fill(dtKupac);

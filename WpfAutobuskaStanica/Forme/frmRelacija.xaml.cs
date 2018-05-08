@@ -18,10 +18,10 @@ namespace WpfAutobuskaStanica.Forme
     /// <summary>
     /// Interaction logic for Relacija.xaml
     /// </summary>
-    public partial class Relacija : Window
+    public partial class frmRelacija : Window
     {
         public SqlConnection konekcija = Konekcija.KreirajKonekciju();
-        public Relacija()
+        public frmRelacija()
         {
             InitializeComponent();
             txtPocetnaSt.Focus();

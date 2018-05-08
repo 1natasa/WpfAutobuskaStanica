@@ -1,11 +1,11 @@
-﻿<Window x:Class="WpfAutobuskaStanica.Forme.Model"
+﻿<Window x:Class="WpfAutobuskaStanica.Forme.frmModel"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfAutobuskaStanica.Forme"
         mc:Ignorable="d"
-        Title="Model" Height="300" Width="450">
+        Title="frmModel" Height="300" Width="450">
     <Grid>
         <Label Content="Naziv" HorizontalAlignment="Left" Margin="117,88,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.987,0.047"/>
         <TextBox Name="txtNaziv" HorizontalAlignment="Left" Height="23" Margin="218,91,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
