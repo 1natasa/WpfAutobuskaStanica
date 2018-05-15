@@ -76,12 +76,29 @@ namespace WpfAutobuskaStanica.Forme
             {
                 //.Text stavimo kad imamo broj
                 //
+
                 konekcija.Open();
-                string insert = @"insert into Karta(brKarte,vrsta,relacijaID,korisnikID,kupacKarteID)
-                values(" + txtBrKarte.Text + ",'" + txtVrstaKarte.Text + "','" + cbxRelacija.SelectedValue + "','" + cbxKorisnik.SelectedValue + "','" + cbxKupacKarte.SelectedValue + "');"; //@ se stavlja da on gleda kao string, a ako nema @ smatrao bi da je to folder
-                SqlCommand cmd = new SqlCommand(insert,konekcija);
-                cmd.ExecuteNonQuery();
-                this.Close(); //ovo zatvara formu
+
+                if (MainWindow.azuriraj)
+                {
+                    DataRowView red =(DataRowView)MainWindow.pomocni;
+
+                    string update = @"Update Karta
+                                        set brKarte='"+txtBrKarte.Text + "', vrsta='" + txtVrstaKarte.Text + "' , relacijaID="+cbxRelacija.SelectedValue+", korisnikID="+cbxKorisnik.SelectedValue+", kupacKarteID="+cbxKupacKarte.SelectedValue + " where kartaID = "+ red["kartaID"];
+                    SqlCommand cmd = new SqlCommand(update, konekcija);
+                    cmd.ExecuteNonQuery();
+                    MainWindow.pomocni = null;
+                    this.Close();
+                }
+                else
+                {
+                    string insert = @"insert into Karta(brKarte,vrsta,relacijaID,korisnikID,kupacKarteID)
+                    values(" + txtBrKarte.Text + ",'" + txtVrstaKarte.Text + "','" + cbxRelacija.SelectedValue + "','" + cbxKorisnik.SelectedValue + "','" + cbxKupacKarte.SelectedValue + "');"; //@ se stavlja da on gleda kao string, a ako nema @ smatrao bi da je to folder
+                    SqlCommand cmd = new SqlCommand(insert, konekcija);
+                    cmd.ExecuteNonQuery();
+                    this.Close(); //ovo zatvara formu
+                }
+               
             }
             catch(SqlException)
             {

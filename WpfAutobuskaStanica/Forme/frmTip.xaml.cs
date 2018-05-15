@@ -33,11 +33,27 @@ namespace WpfAutobuskaStanica.Forme
             try
             {
                 konekcija.Open();
-                string insert = @"insert into TipVozila(naziv)
+
+                if(MainWindow.azuriraj)
+                {
+                    DataRowView red = (DataRowView)MainWindow.pomocni;
+
+                    string update = @"Update TipVozila
+                                        set naziv='" + txtNaziv.Text + "' where tipVozilaID = " + red["tipVozilaID"];
+                    SqlCommand cmd = new SqlCommand(update, konekcija);
+                    cmd.ExecuteNonQuery();
+                    MainWindow.pomocni = null;
+                    this.Close();
+                }
+                else
+                {
+                    string insert = @"insert into TipVozila(naziv)
                 values('" + txtNaziv.Text + "');"; //@ se stavlja da on gleda kao string, a ako nema @ smatrao bi da je to folder
-                SqlCommand cmd = new SqlCommand(insert, konekcija);
-                cmd.ExecuteNonQuery();
-                this.Close(); //ovo zatvara formu
+                    SqlCommand cmd = new SqlCommand(insert, konekcija);
+                    cmd.ExecuteNonQuery();
+                    this.Close(); //ovo zatvara formu
+                }
+              
             }
             catch (SqlException)
             {

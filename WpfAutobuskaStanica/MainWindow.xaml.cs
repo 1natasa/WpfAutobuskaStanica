@@ -24,6 +24,8 @@ namespace WpfAutobuskaStanica
     public partial class MainWindow : Window
     {
         public SqlConnection konekcija = Konekcija.KreirajKonekciju();
+        public static bool azuriraj;
+        public static object pomocni;
         public MainWindow()
         {
             InitializeComponent();
@@ -925,6 +927,777 @@ namespace WpfAutobuskaStanica
             //sto se ovde poziva dataGridCentralni
             dataGridCentralni.ItemsSource = dt.DefaultView;
 
+        }
+
+        private void btnIzmeniKartu_Click(object sender, RoutedEventArgs e)
+        {
+            try {
+
+                azuriraj = true;
+                frmKarta prozor = new frmKarta();
+                konekcija.Open();
+
+                DataRowView red = (DataRowView)dataGridCentralni.SelectedItems[0];
+
+                pomocni = red;
+                string upit = "select * from Karta where kartaID = " + red["kartaID"] ;
+                SqlCommand komanda = new SqlCommand(upit, konekcija);
+                SqlDataReader citac = komanda.ExecuteReader();
+                while (citac.Read())
+                {
+                    //podaci iz baze
+                    prozor.txtBrKarte.Text = citac["brKarte"].ToString();
+                    prozor.txtVrstaKarte.Text = citac["vrsta"].ToString();
+                    prozor.cbxRelacija.SelectedValue = citac["relacijaID"].ToString();
+                    prozor.cbxKorisnik.SelectedValue = citac["korisnikID"].ToString();
+                    prozor.cbxKupacKarte.SelectedValue = citac["kupacKarteID"].ToString();
+                    //fali za strane kljuceve
+
+                    prozor.ShowDialog();
+                }
+
+            } catch (ArgumentOutOfRangeException)
+            {
+                MessageBox.Show("Niste selektovali red.", "Obavestenje");
+            }
+            finally {
+
+                if (konekcija != null)
+                {
+                    konekcija.Close();
+                }
+
+                PocetniDataGrid(dataGridCentralni);
+                azuriraj = false;
+            }
+        }
+
+        private void btnIzmeniKorisnika_Click(object sender, RoutedEventArgs e)
+        {
+
+            try
+            {
+                azuriraj = true;
+                frmKorisnik prozor = new frmKorisnik();
+                konekcija.Open();
+
+                DataRowView red = (DataRowView)dataGridCentralni.SelectedItems[0];
+
+                pomocni = red;
+                string upit = "select * from Korisnik where korisnikID = " + red["korisnikID"];
+                SqlCommand komanda = new SqlCommand(upit, konekcija);
+                SqlDataReader citac = komanda.ExecuteReader();
+                while (citac.Read())
+                {
+                    //podaci iz baze
+                    prozor.txtImeKorisnik.Text = citac["ime"].ToString();
+                    prozor.txtPrezimeKorisnik.Text = citac["prezime"].ToString();
+                    prozor.txtJmbgKorisnik.Text = citac["jmbg"].ToString();
+                    prozor.txtKontaktKorisnik.Text = citac["kontakt"].ToString();
+                    prozor.txtAdresaKorisnik.Text = citac["adresa"].ToString();
+                    prozor.txtgGradKorisnik.Text = citac["grad"].ToString();
+                    //fali za strane kljuceve
+
+                    prozor.ShowDialog();
+                }
+
+                //dodati jos ostali deo koda!!!
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Niste selektovali red.", "Obavestenje");
+
+            }
+            finally {
+
+                if (konekcija != null)
+                {
+                    konekcija.Close();
+                }
+
+                btnKorisnik_Click(sender, e);
+                azuriraj = false;
+
+            }
+
+        }
+
+        private void btnObrisiKartu_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                konekcija.Open();
+                DataRowView red = (DataRowView)dataGridCentralni.SelectedItems[0];
+                string upit = "Delete from Karta where kartaID= " + red["kartaID"];
+                MessageBoxResult rezultat = MessageBox.Show("Da li ste sigurni da zelite da obrisite Kartu?", "Upozorenje", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+                if (rezultat == MessageBoxResult.Yes)
+                {
+                    SqlCommand komanda = new SqlCommand(upit, konekcija);
+                    komanda.ExecuteNonQuery();
+                }
+
+
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                MessageBox.Show("Niste selektovali red.", "Obavestenje");
+
+
+            }
+            catch (SqlException)
+            {
+                MessageBox.Show("Postoje povezani podaci u drugoj tabeli. Nije moguce obrisati red.", "Obavestenje");
+            }
+            finally
+            {
+                if (konekcija != null)
+                {
+                    konekcija.Close();
+                }
+                PocetniDataGrid(dataGridCentralni);
+            }
+        }
+
+        private void btnObrisiKorisnika_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                konekcija.Open();
+                DataRowView red = (DataRowView)dataGridCentralni.SelectedItems[0];
+                string upit = "Delete from Korisnik where korisnikID= " + red["korisnikID"];
+                MessageBoxResult rezultat = MessageBox.Show("Da li ste sigurni da zelite da obrisite Korisnika?", "Upozorenje", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+                if (rezultat == MessageBoxResult.Yes)
+                {
+                    SqlCommand komanda = new SqlCommand(upit, konekcija);
+                    komanda.ExecuteNonQuery();
+                }
+
+
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                MessageBox.Show("Niste selektovali red.", "Obavestenje");
+
+
+            }
+            catch (SqlException)
+            {
+                MessageBox.Show("Postoje povezani podaci u drugoj tabeli. Nije moguce obrisati red.", "Obavestenje");
+            }
+            finally
+            {
+                if (konekcija != null)
+                {
+                    konekcija.Close();
+                }
+                btnKorisnik_Click(sender, e);
+            }
+        }
+
+        private void btnIzmeniKupca_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                azuriraj = true;
+                frmKupac prozor = new frmKupac();
+                konekcija.Open();
+
+                DataRowView red = (DataRowView)dataGridCentralni.SelectedItems[0];
+
+                pomocni = red;
+                string upit = "select * from KupacKarte where kupacKarteID = " + red["kupacKarteID"];
+                SqlCommand komanda = new SqlCommand(upit, konekcija);
+                SqlDataReader citac = komanda.ExecuteReader();
+                while (citac.Read())
+                {
+                    //podaci iz baze
+                    prozor.txtPopust.Text = citac["popust"].ToString();
+                    prozor.txtImeKupac.Text = citac["ime"].ToString();
+                    prozor.txtPrezimeKupac.Text = citac["prezime"].ToString();
+                    prozor.txtJmbgKupac.Text = citac["jmbg"].ToString();
+                    prozor.txtKontaktKupac.Text = citac["kontakt"].ToString();
+                    prozor.txtAdresaKupac.Text = citac["adresa"].ToString();
+                    prozor.txtgGradKupac.Text = citac["grad"].ToString();
+                  
+                    //fali za strane kljuceve
+
+                    prozor.ShowDialog();
+                }
+
+                //dodati jos ostali deo koda!!!
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Niste selektovali red.", "Obavestenje");
+
+            }
+            finally
+            {
+
+                if (konekcija != null)
+                {
+                    konekcija.Close();
+                }
+
+                
+                btnKupacKarte_Click(sender, e);
+                azuriraj = false;
+
+            }
+
+        }
+
+        private void btnIzmeniMarku_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                azuriraj = true;
+                frmMarka prozor = new frmMarka();
+                konekcija.Open();
+
+                DataRowView red = (DataRowView)dataGridCentralni.SelectedItems[0];
+
+                pomocni = red;
+                string upit = "select * from MarkaVozila where markaID = " + red["markaID"];
+                SqlCommand komanda = new SqlCommand(upit, konekcija);
+                SqlDataReader citac = komanda.ExecuteReader();
+                while (citac.Read())
+                {
+                    //podaci iz baze
+                    prozor.txtNaziv.Text = citac["naziv"].ToString();
+                 
+                    
+
+                    //fali za strane kljuceve
+
+                    prozor.ShowDialog();
+                }
+
+                //dodati jos ostali deo koda!!!
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Niste selektovali red.", "Obavestenje");
+
+            }
+            finally
+            {
+
+                if (konekcija != null)
+                {
+                    konekcija.Close();
+                }
+
+
+                btnMarka_Click(sender, e);
+                azuriraj = false;
+
+            }
+        }
+
+        private void btnObrisiKupca_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                konekcija.Open();
+                DataRowView red = (DataRowView)dataGridCentralni.SelectedItems[0];
+                string upit = "Delete from KupacKarte where kupacKarteID= " + red["kupacKarteID"];
+                MessageBoxResult rezultat = MessageBox.Show("Da li ste sigurni da zelite da obrisite Kupca?", "Upozorenje", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+                if (rezultat == MessageBoxResult.Yes)
+                {
+                    SqlCommand komanda = new SqlCommand(upit, konekcija);
+                    komanda.ExecuteNonQuery();
+                }
+
+
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                MessageBox.Show("Niste selektovali red.", "Obavestenje");
+
+
+            }
+            catch (SqlException)
+            {
+                MessageBox.Show("Postoje povezani podaci u drugoj tabeli. Nije moguce obrisati red.", "Obavestenje");
+            }
+            finally
+            {
+                if (konekcija != null)
+                {
+                    konekcija.Close();
+                }
+                btnKupacKarte_Click(sender, e);
+            }
+        }
+
+        private void btnObrisiMarku_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                konekcija.Open();
+                DataRowView red = (DataRowView)dataGridCentralni.SelectedItems[0];
+                string upit = "Delete from MarkaVozila where markaID= " + red["markaID"];
+                MessageBoxResult rezultat = MessageBox.Show("Da li ste sigurni da zelite da obrisite Marku?", "Upozorenje", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+                if (rezultat == MessageBoxResult.Yes)
+                {
+                    SqlCommand komanda = new SqlCommand(upit, konekcija);
+                    komanda.ExecuteNonQuery();
+                }
+
+
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                MessageBox.Show("Niste selektovali red.", "Obavestenje");
+
+
+            }
+            catch (SqlException)
+            {
+                MessageBox.Show("Postoje povezani podaci u drugoj tabeli. Nije moguce obrisati red.", "Obavestenje");
+            }
+            finally
+            {
+                if (konekcija != null)
+                {
+                    konekcija.Close();
+                }
+                btnMarka_Click(sender, e);
+            }
+        }
+
+        private void btnIzmeniModel_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                azuriraj = true;
+                frmModel prozor = new frmModel();
+                konekcija.Open();
+
+                DataRowView red = (DataRowView)dataGridCentralni.SelectedItems[0];
+
+                pomocni = red;
+                string upit = "select * from ModelVozila where modelID = " + red["modelID"];
+                SqlCommand komanda = new SqlCommand(upit, konekcija);
+                SqlDataReader citac = komanda.ExecuteReader();
+                while (citac.Read())
+                {
+                    //podaci iz baze
+                    prozor.txtNaziv.Text = citac["naziv"].ToString();
+
+
+
+                    //fali za strane kljuceve
+
+                    prozor.ShowDialog();
+                }
+
+                //dodati jos ostali deo koda!!!
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Niste selektovali red.", "Obavestenje");
+
+            }
+            finally
+            {
+
+                if (konekcija != null)
+                {
+                    konekcija.Close();
+                }
+
+
+                btnModel_Click(sender, e);
+                azuriraj = false;
+
+            }
+        }
+
+        private void btnObrisiModel_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                konekcija.Open();
+                DataRowView red = (DataRowView)dataGridCentralni.SelectedItems[0];
+                string upit = "Delete from ModelVozila where modelID= " + red["modelID"];
+                MessageBoxResult rezultat = MessageBox.Show("Da li ste sigurni da zelite da obrisite Model?", "Upozorenje", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+                if (rezultat == MessageBoxResult.Yes)
+                {
+                    SqlCommand komanda = new SqlCommand(upit, konekcija);
+                    komanda.ExecuteNonQuery();
+                }
+
+
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                MessageBox.Show("Niste selektovali red.", "Obavestenje");
+
+
+            }
+            catch (SqlException)
+            {
+                MessageBox.Show("Postoje povezani podaci u drugoj tabeli. Nije moguce obrisati red.", "Obavestenje");
+            }
+            finally
+            {
+                if (konekcija != null)
+                {
+                    konekcija.Close();
+                }
+                btnModel_Click(sender, e);
+            }
+        }
+
+        private void btnIzmeniTip_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                azuriraj = true;
+                frmTip prozor = new frmTip();
+                konekcija.Open();
+
+                DataRowView red = (DataRowView)dataGridCentralni.SelectedItems[0];
+
+                pomocni = red;
+                string upit = "select * from TipVozila where tipVozilaID = " + red["tipVozilaID"];
+                SqlCommand komanda = new SqlCommand(upit, konekcija);
+                SqlDataReader citac = komanda.ExecuteReader();
+                while (citac.Read())
+                {
+                    //podaci iz baze
+                    prozor.txtNaziv.Text = citac["naziv"].ToString();
+
+
+
+                    //fali za strane kljuceve
+
+                    prozor.ShowDialog();
+                }
+
+                //dodati jos ostali deo koda!!!
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Niste selektovali red.", "Obavestenje");
+
+            }
+            finally
+            {
+
+                if (konekcija != null)
+                {
+                    konekcija.Close();
+                }
+
+
+                btnTip_Click(sender, e);
+                azuriraj = false;
+
+            }
+        }
+
+        private void btnObrisiTip_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                konekcija.Open();
+                DataRowView red = (DataRowView)dataGridCentralni.SelectedItems[0];
+                string upit = "Delete from TipVozila where tipVozilaID= " + red["tipVozilaID"];
+                MessageBoxResult rezultat = MessageBox.Show("Da li ste sigurni da zelite da obrisite Tip?", "Upozorenje", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+                if (rezultat == MessageBoxResult.Yes)
+                {
+                    SqlCommand komanda = new SqlCommand(upit, konekcija);
+                    komanda.ExecuteNonQuery();
+                }
+
+
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                MessageBox.Show("Niste selektovali red.", "Obavestenje");
+
+
+            }
+            catch (SqlException)
+            {
+                MessageBox.Show("Postoje povezani podaci u drugoj tabeli. Nije moguce obrisati red.", "Obavestenje");
+            }
+            finally
+            {
+                if (konekcija != null)
+                {
+                    konekcija.Close();
+                }
+                btnTip_Click(sender, e);
+            }
+        }
+
+        private void btnIzmeniPrevoznika_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                azuriraj = true;
+                frmPrevoznik prozor = new frmPrevoznik();
+                konekcija.Open();
+
+                DataRowView red = (DataRowView)dataGridCentralni.SelectedItems[0];
+
+                pomocni = red;
+                string upit = "select * from Prevoznik where prevoznikID = " + red["prevoznikID"];
+                SqlCommand komanda = new SqlCommand(upit, konekcija);
+                SqlDataReader citac = komanda.ExecuteReader();
+                while (citac.Read())
+                {
+                    //podaci iz baze
+                    prozor.txtGrad.Text = citac["grad"].ToString();
+                    prozor.txtNaziv.Text = citac["naziv"].ToString();
+                    prozor.txtKontakt.Text = citac["kontakt"].ToString();
+
+
+
+                    //fali za strane kljuceve
+
+                    prozor.ShowDialog();
+                }
+
+                //dodati jos ostali deo koda!!!
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Niste selektovali red.", "Obavestenje");
+
+            }
+            finally
+            {
+
+                if (konekcija != null)
+                {
+                    konekcija.Close();
+                }
+
+
+                btnPrevoznik_Click(sender, e);
+                azuriraj = false;
+
+            }
+        }
+
+        private void btnObrisiPrevoznika_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                konekcija.Open();
+                DataRowView red = (DataRowView)dataGridCentralni.SelectedItems[0];
+                string upit = "Delete from Prevoznik where prevoznikID= " + red["prevoznikID"];
+                MessageBoxResult rezultat = MessageBox.Show("Da li ste sigurni da zelite da obrisite Prevoznika?", "Upozorenje", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+                if (rezultat == MessageBoxResult.Yes)
+                {
+                    SqlCommand komanda = new SqlCommand(upit, konekcija);
+                    komanda.ExecuteNonQuery();
+                }
+
+
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                MessageBox.Show("Niste selektovali red.", "Obavestenje");
+
+
+            }
+            catch (SqlException)
+            {
+                MessageBox.Show("Postoje povezani podaci u drugoj tabeli. Nije moguce obrisati red.", "Obavestenje");
+            }
+            finally
+            {
+                if (konekcija != null)
+                {
+                    konekcija.Close();
+                }
+                btnPrevoznik_Click(sender, e);
+            }
+        }
+
+        private void btnIzmeniRelaciju_Click(object sender, RoutedEventArgs e)
+        {
+
+            try
+            {
+
+                azuriraj = true;
+                frmRelacija prozor = new frmRelacija();
+                konekcija.Open();
+
+                DataRowView red = (DataRowView)dataGridCentralni.SelectedItems[0];
+
+                pomocni = red;
+                string upit = "select * from Relacija where relacijaID = " + red["relacijaID"];
+                SqlCommand komanda = new SqlCommand(upit, konekcija);
+                SqlDataReader citac = komanda.ExecuteReader();
+                while (citac.Read())
+                {
+                    //podaci iz baze
+                    prozor.txtPocetnaSt.Text = citac["pocetnaStanica"].ToString();
+                    prozor.txtKrajnjaStanica.Text = citac["krajnjaStanica"].ToString();
+                    prozor.txtKilometri.Text = citac["km"].ToString();
+
+                    prozor.txtTrajanjePut.Text = citac["trajanjePutovanja"].ToString();
+                    prozor.txtPeron.Text = citac["peron"].ToString();
+                    prozor.txtCena.Text = citac["cena"].ToString();
+                    prozor.cbxPrevoznik.SelectedValue = citac["prevoznikID"].ToString();
+                    //fali za strane kljuceve
+
+                    prozor.ShowDialog();
+                }
+
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                MessageBox.Show("Niste selektovali red.", "Obavestenje");
+            }
+            finally
+            {
+
+                if (konekcija != null)
+                {
+                    konekcija.Close();
+                }
+                btnRelacija_Click(sender, e);
+                azuriraj = false;
+            }
+        }
+
+        private void btnObrisiRelaciju_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                konekcija.Open();
+                DataRowView red = (DataRowView)dataGridCentralni.SelectedItems[0];
+                string upit = "Delete from Relacija where relacijaID= " + red["relacijaID"];
+                MessageBoxResult rezultat = MessageBox.Show("Da li ste sigurni da zelite da obrisite Relaciju?", "Upozorenje", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+                if (rezultat == MessageBoxResult.Yes)
+                {
+                    SqlCommand komanda = new SqlCommand(upit, konekcija);
+                    komanda.ExecuteNonQuery();
+                }
+
+
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                MessageBox.Show("Niste selektovali red.", "Obavestenje");
+
+
+            }
+            catch (SqlException)
+            {
+                MessageBox.Show("Postoje povezani podaci u drugoj tabeli. Nije moguce obrisati red.", "Obavestenje");
+            }
+            finally
+            {
+                if (konekcija != null)
+                {
+                    konekcija.Close();
+                }
+                btnRelacija_Click(sender, e);
+            }
+        }
+
+        private void btnIzmeniVozaca_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+
+                azuriraj = true;
+                frmVozac prozor = new frmVozac();
+                konekcija.Open();
+
+                DataRowView red = (DataRowView)dataGridCentralni.SelectedItems[0];
+
+                pomocni = red;
+                string upit = "select * from Vozac where vozacID = " + red["vozacID"];
+                SqlCommand komanda = new SqlCommand(upit, konekcija);
+                SqlDataReader citac = komanda.ExecuteReader();
+                while (citac.Read())
+                {
+                    //podaci iz baze
+                    prozor.txtImeVozac.Text = citac["ime"].ToString();
+                    prozor.txtPrezimeVozac.Text = citac["prezime"].ToString();
+                    prozor.txtJmbgVozac.Text = citac["jmbg"].ToString();
+                    prozor.txtKontaktVozac.Text = citac["kontakt"].ToString();
+
+                    
+                    prozor.txtVozackaDoz.Text = citac["dozvola"].ToString();
+                    prozor.txtAdresaVozac.Text = citac["adresa"].ToString();
+                    prozor.txtGradVozac.Text = citac["grad"].ToString();
+                    //fali za strane kljuceve
+
+                    prozor.ShowDialog();
+                }
+
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                MessageBox.Show("Niste selektovali red.", "Obavestenje");
+            }
+            finally
+            {
+
+                if (konekcija != null)
+                {
+                    konekcija.Close();
+                }
+                btnVozac_Click(sender, e);
+                azuriraj = false;
+            }
+        }
+
+        private void btnObrisiVozaca_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                konekcija.Open();
+                DataRowView red = (DataRowView)dataGridCentralni.SelectedItems[0];
+                string upit = "Delete from Vozac where vozacID= " + red["vozacID"];
+                MessageBoxResult rezultat = MessageBox.Show("Da li ste sigurni da zelite da obrisite Vozaca?", "Upozorenje", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+                if (rezultat == MessageBoxResult.Yes)
+                {
+                    SqlCommand komanda = new SqlCommand(upit, konekcija);
+                    komanda.ExecuteNonQuery();
+                }
+
+
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                MessageBox.Show("Niste selektovali red.", "Obavestenje");
+
+
+            }
+            catch (SqlException)
+            {
+                MessageBox.Show("Postoje povezani podaci u drugoj tabeli. Nije moguce obrisati red.", "Obavestenje");
+            }
+            finally
+            {
+                if (konekcija != null)
+                {
+                    konekcija.Close();
+                }
+                btnVozac_Click(sender, e);
+            }
         }
     }
 }

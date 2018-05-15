@@ -32,11 +32,28 @@ namespace WpfAutobuskaStanica.Forme
             try
             {
                 konekcija.Open();
-                string insert = @"insert into Korisnik(ime,prezime,jmbg,kontakt,adresa,grad)
+                if (MainWindow.azuriraj)
+                {
+
+                    DataRowView red = (DataRowView)MainWindow.pomocni;
+
+                    string update = @"Update Korisnik
+                                        set ime='" + txtImeKorisnik.Text + "', prezime='" + txtPrezimeKorisnik.Text + "' , jmbg='" + txtJmbgKorisnik.Text + "', kontakt='" + txtKontaktKorisnik.Text + "', adresa='" + txtAdresaKorisnik.Text + "', grad='"+ txtgGradKorisnik.Text+"' where korisnikID = " + red["korisnikID"];
+                    SqlCommand cmd = new SqlCommand(update, konekcija);
+                    cmd.ExecuteNonQuery();
+                    MainWindow.pomocni = null;
+                    this.Close();
+                }
+                else
+                {
+                   // konekcija.Open();
+                    string insert = @"insert into Korisnik(ime,prezime,jmbg,kontakt,adresa,grad)
                 values('" + txtImeKorisnik.Text + "','" + txtPrezimeKorisnik.Text + "','" + txtJmbgKorisnik.Text + "','" + txtKontaktKorisnik.Text + "','" + txtAdresaKorisnik.Text + "','" + txtgGradKorisnik.Text + "');"; //@ se stavlja da on gleda kao string, a ako nema @ smatrao bi da je to folder
-                SqlCommand cmd = new SqlCommand(insert, konekcija);
-                cmd.ExecuteNonQuery();
-                this.Close(); //ovo zatvara formu
+                    SqlCommand cmd = new SqlCommand(insert, konekcija);
+                    cmd.ExecuteNonQuery();
+                    this.Close(); //ovo zatvara formu
+                }
+                
             }
             catch (SqlException)
             {

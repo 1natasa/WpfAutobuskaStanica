@@ -16,7 +16,7 @@
         <Label Content="Kontakt" HorizontalAlignment="Left" Margin="77,138,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.207,-1.029" Height="28" Width="52"/>
         <TextBox Name="txtKontaktVozac" HorizontalAlignment="Left" Height="25" Margin="181,141,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="123"/>
         <Label Content="Adresa" HorizontalAlignment="Left" Margin="80,211,0,0" VerticalAlignment="Top" Height="28" Width="47"/>
-        <TextBox Name="txtAdresaKorisnik" HorizontalAlignment="Left" Height="25" Margin="181,214,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="123"/>
+        <TextBox Name="txtAdresaVozac" HorizontalAlignment="Left" Height="25" Margin="181,214,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="123"/>
         <Label Content="Grad" HorizontalAlignment="Left" Margin="80,248,0,0" VerticalAlignment="Top" Height="28" Width="37"/>
         <TextBox Name="txtGradVozac" HorizontalAlignment="Left" Height="25" Margin="181,251,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="123"/>
         <Button Name="btnSacuvaj" Content="Sacuvaj" HorizontalAlignment="Left" Margin="77,308,0,0" VerticalAlignment="Top" Width="80" Height="36" Click="btnSacuvaj_Click"/>

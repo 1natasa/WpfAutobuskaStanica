@@ -33,11 +33,32 @@ namespace WpfAutobuskaStanica.Forme
             try
             {
                 konekcija.Open();
-                string insert = @"insert into KupacKarte(popust,ime,prezime,jmbg,kontakt,adresa,grad)
-                values(" + txtPopust.Text + ",'" + txtImeKupac.Text + "','" + txtPrezimeKupac.Text + "','" + txtJmbgKupac.Text + "','" + txtKontaktKupac.Text + "','" + txtAdresaKupac.Text + "','" + txtgGradKupac.Text + "');"; //@ se stavlja da on gleda kao string, a ako nema @ smatrao bi da je to folder
-                SqlCommand cmd = new SqlCommand(insert, konekcija);
-                cmd.ExecuteNonQuery();
-                this.Close(); //ovo zatvara formu
+                if (MainWindow.azuriraj)
+                {
+                    DataRowView red = (DataRowView)MainWindow.pomocni;
+
+                   // string update = @"Update KupacKarte
+                                        //set popust="+ txtPopust.Text+",'ime='" + txtImeKupac.Text + "', prezime='" + txtPrezimeKupac.Text + "' , jmbg='" + txtJmbgKupac.Text + "', kontakt='" + txtKontaktKupac.Text + "', adresa='" + txtAdresaKupac.Text + "', grad='" + txtgGradKupac.Text + "',  where kupacKarteID = " + red["kupacKarteID"];
+
+                   
+
+                    string update = @"Update KupacKarte
+                                        set popust=" + txtPopust.Text + ", ime='" + txtImeKupac.Text + "' ,prezime='"+txtPrezimeKupac.Text+"', jmbg='" + txtJmbgKupac.Text + "', kontakt='" + txtKontaktKupac.Text + "', adresa='" + txtAdresaKupac.Text + "', grad='" + txtgGradKupac.Text + "' where kupacKarteID = " + red["kupacKarteID"];
+                    SqlCommand cmd = new SqlCommand(update, konekcija);
+                    cmd.ExecuteNonQuery();
+                    MainWindow.pomocni = null;
+                    this.Close();
+                }
+                else
+                {
+                    //konekcija.Open();
+                    string insert = @"insert into KupacKarte(popust,ime,prezime,jmbg,kontakt,adresa,grad)
+                        values(" + txtPopust.Text + ",'" + txtImeKupac.Text + "','" + txtPrezimeKupac.Text + "','" + txtJmbgKupac.Text + "','" + txtKontaktKupac.Text + "','" + txtAdresaKupac.Text + "','" + txtgGradKupac.Text + "');"; //@ se stavlja da on gleda kao string, a ako nema @ smatrao bi da je to folder
+                    SqlCommand cmd = new SqlCommand(insert, konekcija);
+                    cmd.ExecuteNonQuery();
+                    this.Close(); //ovo zatvara formu
+                }
+               
             }
             catch (SqlException)
             {

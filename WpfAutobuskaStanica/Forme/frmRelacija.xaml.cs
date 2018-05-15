@@ -28,6 +28,7 @@ namespace WpfAutobuskaStanica.Forme
             try
             {
                 konekcija.Open();
+
                 string vartiPrevoznike = "select prevoznikID, naziv from Prevoznik";
                 DataTable dtPrevoznik = new DataTable();
                 SqlDataAdapter daPrevoznik = new SqlDataAdapter(vartiPrevoznike,konekcija);
@@ -52,11 +53,28 @@ namespace WpfAutobuskaStanica.Forme
             try
             {
                 konekcija.Open();
-                string insert = @"insert into Relacija(pocetnaStanica,krajnjaStanica,km,trajanjePutovanja,peron,cena,prevoznikID)
+
+                if (MainWindow.azuriraj)
+                {
+
+                    DataRowView red = (DataRowView)MainWindow.pomocni;
+
+                    string update = @"Update Relacija
+                                        set pocetnaStanica='" + txtPocetnaSt.Text + "', krajnjaStanica='" + txtKrajnjaStanica.Text + "' , km=" + txtKilometri.Text + ", trajanjePutovanja='" + txtTrajanjePut.Text + "',peron=" + txtPeron.Text + ", cena=" + txtCena.Text + ",prevoznikID=" + cbxPrevoznik.SelectedValue + " where relacijaID = " + red["relacijaID"];
+                    SqlCommand cmd = new SqlCommand(update, konekcija);
+                    cmd.ExecuteNonQuery();
+                    MainWindow.pomocni = null;
+                    this.Close();
+                }
+                else
+                {
+                    string insert = @"insert into Relacija(pocetnaStanica,krajnjaStanica,km,trajanjePutovanja,peron,cena,prevoznikID)
                 values('" + txtPocetnaSt.Text + "','" + txtKrajnjaStanica.Text + "','" + txtKilometri.Text + "','" + txtTrajanjePut.Text + "'," + txtPeron.Text + ",'" + txtCena.Text + "','" + cbxPrevoznik.SelectedValue + "');"; //@ se stavlja da on gleda kao string, a ako nema @ smatrao bi da je to folder
-                SqlCommand cmd = new SqlCommand(insert, konekcija);
-                cmd.ExecuteNonQuery();
-                this.Close(); //ovo zatvara formu
+                    SqlCommand cmd = new SqlCommand(insert, konekcija);
+                    cmd.ExecuteNonQuery();
+                    this.Close(); //ovo zatvara formu
+                }
+               
             }
             catch (SqlException)
             {
