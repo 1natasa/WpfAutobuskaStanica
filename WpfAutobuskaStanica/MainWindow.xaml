@@ -60,8 +60,8 @@
             <Button Name="btnObrisiVozaca" Content="Obrisi vozaca" VerticalAlignment="Top" Width="117" Height="30" Click="btnObrisiVozaca_Click"/>
 
             <Button Name="btnDodajVozilo" Content="Dodaj vozilo" VerticalAlignment="Top" Width="117" Height="30" Click="btnDodajVozilo_Click"/>
-            <Button Name="btnIzmeniVozilo" Content="Izmeni vozilo" VerticalAlignment="Top" Width="117" Height="30"/>
-            <Button Name="btnObrisiVozilo" Content="Obrisi vozilo" VerticalAlignment="Top" Width="117" Height="30"/>
+            <Button Name="btnIzmeniVozilo" Content="Izmeni vozilo" VerticalAlignment="Top" Width="117" Height="30" Click="btnIzmeniVozilo_Click"/>
+            <Button Name="btnObrisiVozilo" Content="Obrisi vozilo" VerticalAlignment="Top" Width="117" Height="30" Click="btnObrisiVozilo_Click"/>
         </StackPanel>
     </Grid>
 </Window>

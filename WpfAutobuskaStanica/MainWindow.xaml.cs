@@ -1699,5 +1699,96 @@ namespace WpfAutobuskaStanica
                 btnVozac_Click(sender, e);
             }
         }
+
+        private void btnIzmeniVozilo_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+
+                azuriraj = true;
+                frmVozilo prozor = new frmVozilo();
+                konekcija.Open();
+
+                DataRowView red = (DataRowView)dataGridCentralni.SelectedItems[0];
+
+                pomocni = red;
+                string upit = "select * from Vozilo where voziloID = " + red["voziloID"];
+                SqlCommand komanda = new SqlCommand(upit, konekcija);
+                SqlDataReader citac = komanda.ExecuteReader();
+                while (citac.Read())
+                {
+                    //podaci iz baze
+                    prozor.txtBrSasije.Text = citac["brSasije"].ToString();
+                    prozor.txtKubikaza.Text = citac["kubikaza"].ToString();
+                    prozor.txtKonjskeSnage.Text = citac["konjskaSnaga"].ToString();
+                    prozor.txtBoja.Text = citac["boja"].ToString();
+
+
+                    prozor.txtBrSedista.Text = citac["brSedista"].ToString();
+                    prozor.txtNosivost.Text = citac["nosivost"].ToString();
+                    prozor.txtMasa.Text = citac["masa"].ToString();
+                    prozor.cbxTip.SelectedValue = citac["tipVozilaID"].ToString();
+                    prozor.cbxMarka.SelectedValue = citac["markaID"].ToString();
+                    prozor.cbxModel.SelectedValue = citac["modelID"].ToString();
+                    prozor.cbxVozac.SelectedValue = citac["vozacID"].ToString();
+                    prozor.cbxPrevoznik.SelectedValue = citac["prevoznikID"].ToString();
+                    //fali za strane kljuceve
+
+                    prozor.ShowDialog();
+                }
+
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                MessageBox.Show("Niste selektovali red.", "Obavestenje");
+            }
+            finally
+            {
+
+                if (konekcija != null)
+                {
+                    konekcija.Close();
+                }
+                btnVozilo_Click(sender, e);
+                azuriraj = false;
+            }
+        }
+
+        private void btnObrisiVozilo_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                konekcija.Open();
+                DataRowView red = (DataRowView)dataGridCentralni.SelectedItems[0];
+                string upit = "Delete from Vozilo where voziloID= " + red["voziloID"];
+                MessageBoxResult rezultat = MessageBox.Show("Da li ste sigurni da zelite da obrisite Vozilo?", "Upozorenje", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+                if (rezultat == MessageBoxResult.Yes)
+                {
+                    SqlCommand komanda = new SqlCommand(upit, konekcija);
+                    komanda.ExecuteNonQuery();
+                }
+
+
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                MessageBox.Show("Niste selektovali red.", "Obavestenje");
+
+
+            }
+            catch (SqlException)
+            {
+                MessageBox.Show("Postoje povezani podaci u drugoj tabeli. Nije moguce obrisati red.", "Obavestenje");
+            }
+            finally
+            {
+                if (konekcija != null)
+                {
+                    konekcija.Close();
+                }
+                btnVozilo_Click(sender, e);
+            }
+        }
     }
 }

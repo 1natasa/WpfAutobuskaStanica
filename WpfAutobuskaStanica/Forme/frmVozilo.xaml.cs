@@ -90,11 +90,27 @@ namespace WpfAutobuskaStanica.Forme
                 //.Text stavimo kad imamo broj
                 //
                 konekcija.Open();
-                string insert = @"insert into Vozilo(brSasije,kubikaza,konjskaSnaga,boja,brSedista,nosivost,masa,tipVozilaID,markaID,modelID,vozacID,prevoznikID)
+
+                if (MainWindow.azuriraj)
+                {
+                    DataRowView red = (DataRowView)MainWindow.pomocni;
+
+                    string update = @"Update Vozilo
+                                        set brSasije='" + txtBrSasije.Text + "', kubikaza=" + txtKubikaza.Text + " , konjskaSnaga=" + txtKonjskeSnage.Text + ", boja='" + txtBoja.Text + "', brSedista=" + txtBrSedista.Text + ",nosivost=" + txtNosivost.Text + ",masa=" + txtMasa.Text + ", tipVozilaID="+ cbxTip.SelectedValue +", markaID="+cbxMarka.SelectedValue+ ", modelID="+ cbxModel.SelectedValue+ ", vozacID="+ cbxVozac.SelectedValue+", prevoznikID="+ cbxPrevoznik.SelectedValue  + " where voziloID = " + red["voziloID"];
+                    SqlCommand cmd = new SqlCommand(update, konekcija);
+                    cmd.ExecuteNonQuery();
+                    MainWindow.pomocni = null;
+                    this.Close();
+                }
+                else
+                {
+                    string insert = @"insert into Vozilo(brSasije,kubikaza,konjskaSnaga,boja,brSedista,nosivost,masa,tipVozilaID,markaID,modelID,vozacID,prevoznikID)
                 values(" + txtBrSasije.Text + "," + txtKubikaza.Text + "," + txtKonjskeSnage.Text + ",'" + txtBoja.Text + "'," + txtBrSedista.Text + "," + txtNosivost.Text + "," + txtMasa.Text + ",'" + cbxTip.SelectedValue + "','" + cbxMarka.SelectedValue + "','" + cbxModel.SelectedValue + "','" + cbxVozac.SelectedValue + "','" + cbxPrevoznik.SelectedValue + "');";
-                SqlCommand cmd = new SqlCommand(insert, konekcija);
-                cmd.ExecuteNonQuery();
-                this.Close(); //ovo zatvara formu
+                    SqlCommand cmd = new SqlCommand(insert, konekcija);
+                    cmd.ExecuteNonQuery();
+                    this.Close(); //ovo zatvara formu
+                }
+               
             }
             catch (SqlException)
             {
